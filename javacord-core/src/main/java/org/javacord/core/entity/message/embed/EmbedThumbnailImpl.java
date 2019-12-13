@@ -8,6 +8,11 @@ import org.javacord.core.util.logging.LoggerUtil;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import java.util.concurrent.CompletableFuture;
+import java.awt.image.BufferedImage;
+import org.javacord.api.DiscordApi;
+import org.javacord.core.util.FileContainer;
+
 /**
  * The implementation of {@link EmbedThumbnail}.
  */
@@ -69,6 +74,11 @@ public class EmbedThumbnailImpl implements EmbedThumbnail {
     @Override
     public int getWidth() {
         return width;
+    }
+    
+    @Override
+    CompletableFuture<BufferedImage> downloadAsBufferedImage(DiscordApi api) {
+        return new FileContainer(getUrl()).asBufferedImage(api);
     }
 
 }
